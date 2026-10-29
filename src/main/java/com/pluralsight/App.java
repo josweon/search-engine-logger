@@ -24,6 +24,8 @@ public class App {
 
         logSearch(input, bufWriter);
 
+        closeApp(bufWriter);
+
         bufWriter.close();
 
     } catch (Exception e) {
@@ -52,13 +54,21 @@ public class App {
                 searchedQuery);
 
         try {
-
             bufWriter.write(writeString);
-
         } catch (IOException e) {
-            System.out.println("ERROR: Invalid IO Stream in logSearch");
+            System.out.println("ERROR: Invalid IO Stream in logSearch " + e.getMessage());
         }
     }
 
     // TODO: add exiting the app
+    public static void closeApp(BufferedWriter bufWriter){
+        LocalDateTime now = LocalDateTime.now();
+        String writeString = String.format("%s %s exit%n", now.format(dateOnly), now.format(timeOnly));
+
+        try {
+            bufWriter.write(writeString);
+        } catch (IOException e) {
+            System.out.println("ERROR: Invalid IO Stream closeApp" + e.getMessage());
+        }
+    }
 }
