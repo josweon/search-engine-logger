@@ -13,18 +13,24 @@ public class App {
 
     public static void main(String[] args) {
         // TODO: static?
+        String input;
         Scanner scanner = new Scanner(System.in);
 
     try {
         BufferedWriter bufWriter = new BufferedWriter(new FileWriter("src/main/resources/logs.txt"));
         launchApp(bufWriter);
 
-        System.out.print("Enter a search term (X or x to exit): ");
-        String input = scanner.nextLine().trim();
+        do {
+            System.out.print("Enter a search term (X or x to exit): ");
+            input = scanner.nextLine().trim();
 
-        logSearch(input, bufWriter);
+            if (!input.equalsIgnoreCase("X")) {
+                logSearch(input, bufWriter);
+            } else {
+                closeApp(bufWriter);
+            }
 
-        closeApp(bufWriter);
+        } while (!input.equalsIgnoreCase("X"));
 
         bufWriter.close();
 
