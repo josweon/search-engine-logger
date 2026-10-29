@@ -14,16 +14,15 @@ public class App {
     public static void main(String[] args) {
         // TODO: static?
         Scanner scanner = new Scanner(System.in);
-        LocalDateTime now = LocalDateTime.now();
 
     try {
         BufferedWriter bufWriter = new BufferedWriter(new FileWriter("src/main/resources/logs.txt"));
-        launchApp(bufWriter, now);
+        launchApp(bufWriter);
 
         System.out.print("Enter a search term (X or x to exit): ");
         String input = scanner.nextLine().trim();
 
-        logSearch(input, bufWriter, now);
+        logSearch(input, bufWriter);
 
         bufWriter.close();
 
@@ -33,7 +32,8 @@ public class App {
 
     }
 
-    public static void launchApp(BufferedWriter bufWriter, LocalDateTime now){
+    public static void launchApp(BufferedWriter bufWriter){
+        LocalDateTime now = LocalDateTime.now();
         String writeString = String.format("%s %s launch%n", now.format(dateOnly), now.format(timeOnly));
         try {
 
@@ -43,14 +43,13 @@ public class App {
             System.out.println("ERROR: Invalid IO Stream " + e.getMessage());
         }
     }
-    // TODO: add searching for term
-    public static void logSearch(String searchedQuery, BufferedWriter bufWriter, LocalDateTime now){
+
+    public static void logSearch(String searchedQuery, BufferedWriter bufWriter){
+        LocalDateTime now = LocalDateTime.now();
         String writeString = String.format("%s %s search : %s%n",
                 now.format(dateOnly),
                 now.format(timeOnly),
                 searchedQuery);
-
-        System.out.println(writeString);
 
         try {
 
